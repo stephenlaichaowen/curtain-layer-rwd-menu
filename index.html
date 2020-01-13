@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Curtain Layer Responsive Menu</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="images/icons/icon-512x512.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="style.css">  
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/http-vue-loader"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="./router/index.js"></script>
+</head>
+
+<style>
+  #curtain {
+    font-family: 'Poppins', sans-serif;
+  }
+</style>
+
+<body>  
+  <div id="curtain" ref="curtain">
+    <span></span>
+    <span></span>
+    <span></span>
+    <ul>  
+      <li><a @click="toHome">Home</a></li>
+      <li><a @click="toAbout">About</a></li>
+      <li><a @click="toServices">Services</a></li>
+      <li><a @click="toPortfolio">Portfolio</a></li>
+      <li><a @click="toContact">Contact</a></li>
+    </ul> 
+    <div class="toggle" @click="toggle"></div>
+    <router-view></router-view>
+  </div>  
+</body>
+</html>
+
+<script>
+const app = new Vue({
+  el: '#curtain',
+  router,
+  methods: {
+    toHome() {
+      this.$router.push('/')
+      this.toggle()
+    },
+    toAbout() {
+      this.$router.push('/about')
+      this.toggle()
+    },
+    toServices() {
+      this.$router.push('/services')
+      this.toggle()
+    },
+    toPortfolio() {
+      this.$router.push('/portfolio')
+      this.toggle()
+    },
+    toContact() {
+      this.$router.push('/contact')
+      this.toggle()
+    },
+    toggle() {      
+      this.$refs.curtain.classList.toggle('active')
+    }
+  }
+})
+</script>
+
+<script>
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker
+      .register('./sw.js')
+      .then(registration => {
+        console.log(registration);
+      })
+      .catch(console.error)
+  }
+</script>
